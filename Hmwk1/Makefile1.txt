@@ -1,0 +1,49 @@
+#@File Makefile1.txt 
+#@Author Jeff Goymerac
+#@Date 1/30/2015
+#@Course CS 5201
+#@brief This is the makefile to compile the beer program in EX1
+#       This example uses explict targets for each object file
+#       With Dependencies listed.
+
+#Poem
+#Why do I feel Shame
+#Sitting to order breakfast,
+#Asking what's on tap?
+#             -Ike 
+
+default: all
+
+all: driver
+
+clean:
+	-@rm -f core > /dev/null 2>&1
+	-@rm -f driver > /dev/null 2>&1
+	-@rm -f additives.o beer.o brewMain.o > /dev/null 2>&1
+
+driver: additives.o \
+        beer.o \
+        brewMain.o
+
+	g++ additives.o beer.o brewMain.o  -o driver
+
+additives.o: additives.h \
+             additives.cpp
+	g++ -c additives.cpp  
+
+beer.o: yeast.h \
+        hops.h \
+        grains.h \
+	    beer.h \
+	    beer.cpp 
+	g++ -c beer.cpp
+
+brewMain: wine.h \
+	      beer.h \
+	      brewMain.cpp
+
+	g++ -c brewMain.cpp
+
+
+
+
