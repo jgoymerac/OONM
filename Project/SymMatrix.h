@@ -107,7 +107,7 @@
 /// @fn operator* (const T& s)  Scalar Multiplication                               ///
 /// @brief Matrix scalar Multiplication operator                                    ///
 /// @pre multiplication must be defined for class T                                 ///
-/// @post N/A                                                                       ///
+
 /// @param s class T object to be multiply the calling object by                    ///
 /// @return Returns a Matrix object containg the product of the individual members  ///
 ///     of  the calling object and s                                                ///
@@ -174,43 +174,326 @@
 #define SymMatrix_h
 #include "Matrix.h"
 
+/**
+ @class	SymMatrix
+
+ @brief	A symbol matrix.
+
+ @author	Jgoym
+ @date	3/21/2018
+
+ @tparam	T	Generic type parameter.
+ */
+
 template <class T>
 class SymMatrix;
 
+/**
+ @fn	template <class U> ostream &operator<< (std::ostream &os, const SymMatrix<U> &cc); template <class U> istream &operator>> (std::istream &is, SymMatrix<U> &cc);
+
+ @brief	Cast that converts the given std::ostream &amp; to a &lt;&lt;&lt; U&gt;
+
+ @author	Jgoym
+ @date	3/21/2018
+
+ @param [in,out]	os	The operating system.
+ @param 			cc	The Cc.
+
+ @return	The result of the operation.
+ */
+
 template <class U>
 ostream &operator<< (std::ostream &os, const SymMatrix<U> &cc);
+
+/**
+ @fn	template <class U> istream &operator>> (std::istream &is, SymMatrix<U> &cc);
+
+ @brief	Stream extraction operator
+
+ @author	Jgoym
+ @date	3/21/2018
+
+ @tparam	U	Generic type parameter.
+ @param [in,out]	is	The is.
+ @param [in,out]	cc	The Cc.
+
+ @return	The result of the operation.
+ */
+
 template <class U>
 istream &operator>> (std::istream &is, SymMatrix<U> &cc);
 
 template <class T>
+
+/**
+ @class	SymMatrix
+
+ @brief	A symbol matrix.
+
+ @author	Jgoym
+ @date	3/21/2018
+ */
+
 class SymMatrix: public Matrix<T>
 {
 public:
-    /***************************Constructors and Destructors******************************/
+
+    /**
+     @fn	SymMatrix::SymMatrix ();
+    
+     @brief	*************************Constructors and Destructors*****************************
+    
+     @author	Jgoym
+     @date	3/21/2018
+     */
+
     SymMatrix ();
+
+    /**
+     @fn	SymMatrix::SymMatrix (const int i);
+    
+     @brief	Constructor
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	i	Zero-based index of the.
+     */
+
     SymMatrix (const int i);
+
+    /**
+     @fn	SymMatrix::SymMatrix (const SymMatrix<T> &s);
+    
+     @brief	Constructor
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A SymMatrix&lt;T&gt; to process.
+     */
+
     SymMatrix (const SymMatrix<T> &s);
+
+    /**
+     @fn	virtual SymMatrix::~SymMatrix ();
+    
+     @brief	Destructor
+    
+     @author	Jgoym
+     @date	3/21/2018
+     */
+
     virtual ~SymMatrix ();
-    /*************************************Operators***************************************/
+
+    /**
+     @fn	virtual MyVect<T> SymMatrix::&operator[] (int i);
+    
+     @brief	***********************************Operators**************************************
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	i	Zero-based index of the.
+    
+     @return	The indexed value.
+     */
 
     virtual MyVect<T> &operator[] (int i);
+
+    /**
+     @fn	virtual const MyVect<T> SymMatrix::&operator[] (int i)const;
+    
+     @brief	Array indexer operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	i	Zero-based index of the.
+    
+     @return	The indexed value.
+     */
+
     virtual const MyVect<T> &operator[] (int i)const;
+
+    /**
+     @fn	SymMatrix<T> SymMatrix::&operator= (const SymMatrix<T> &s);
+    
+     @brief	Assignment operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A SymMatrix&lt;T&gt; to process.
+    
+     @return	A shallow copy of this object.
+     */
+
     SymMatrix<T> &operator= (const SymMatrix<T> &s);                    //assignment
+
+    /**
+     @fn	SymMatrix<T> SymMatrix::&operator+ (const SymMatrix<T> &s)const;
+    
+     @brief	Addition operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A SymMatrix&lt;T&gt; to process.
+    
+     @return	The result of the operation.
+     */
+
     SymMatrix<T> &operator+ (const SymMatrix<T> &s)const;               //addition
+
+    /**
+     @fn	SymMatrix<T> SymMatrix::&operator- (const SymMatrix<T> &s)const;
+    
+     @brief	Subtraction operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A SymMatrix&lt;T&gt; to process.
+    
+     @return	The result of the operation.
+     */
+
     SymMatrix<T> &operator- (const SymMatrix<T> &s)const;               //subtraction/ adding the negative
+
+    /**
+     @fn	SymMatrix<T> SymMatrix::&operator- ()const;
+    
+     @brief	Negation operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @return	The result of the operation.
+     */
+
     SymMatrix<T> &operator- ()const;                                    //negative
+
+    /**
+     @fn	SymMatrix<T> SymMatrix::&operator* (const T& s);
+    
+     @brief	Multiplication operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A T to process.
+    
+     @return	The result of the operation.
+     */
+
     SymMatrix<T> &operator* (const T& s);                               //Scaler times a Matrix
+
+    /**
+     @fn	virtual MyVect<T> SymMatrix::&operator* (const MyVect<T> &s);
+    
+     @brief	Multiplication operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A MyVect&lt;T&gt; to process.
+    
+     @return	The result of the operation.
+     */
+
     virtual MyVect<T> &operator* (const MyVect<T> &s);                  //Matrix times a MyVect
+
+    /**
+     @fn	SymMatrix<T> SymMatrix::operator* (const SymMatrix<T> &s);
+    
+     @brief	Multiplication operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A SymMatrix&lt;T&gt; to process.
+    
+     @return	The result of the operation.
+     */
+
     SymMatrix<T> operator* (const SymMatrix<T> &s);                     // Matrix times a Matrix
+
+    /**
+     @fn	SymMatrix<T> SymMatrix::operator~ ();
+    
+     @brief	Bitwise 'ones complement' operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @return	The result of the operation.
+     */
+
     SymMatrix<T> operator~ ();                                          //transpose
+
+    /**
+     @fn	virtual int SymMatrix::size ()const;
+    
+     @brief	Gets the size
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @return	An int.
+     */
+
     virtual int size ()const;                                           //return size
 
+    /**
+     @fn	friend std::ostream &operator<< SymMatrix::<> (std::ostream &os, const SymMatrix<T> &cc); friend std::istream &operator>> <> (std::istream &is, SymMatrix<T> &cc);
+    
+     @brief	Cast that converts the given std::ostream &amp; to a &lt;&lt;&lt;&gt;
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param [in,out]	os	The operating system.
+     @param 			cc	The Cc.
+    
+     @return	The result of the operation.
+     */
+
     friend std::ostream &operator<< <> (std::ostream &os, const SymMatrix<T> &cc);
+
+    /**
+     @fn	friend std::istream &operator>> SymMatrix::<> (std::istream &is, SymMatrix<T> &cc);
+    
+     @brief	Stream extraction operator
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param [in,out]	is	The is.
+     @param [in,out]	cc	The Cc.
+    
+     @return	The result of the operation.
+     */
+
     friend std::istream &operator>> <> (std::istream &is, SymMatrix<T> &cc);
 
 private:
+    /** @brief	The data */
     MyVect<T> *m_data;
+    /** @brief	The size */
     int m_size;
+
+    /**
+     @fn	void SymMatrix::copy (const SymMatrix<T> &s);
+    
+     @brief	Copies the given s
+    
+     @author	Jgoym
+     @date	3/21/2018
+    
+     @param	s	A SymMatrix&lt;T&gt; to process.
+     */
+
     void copy (const SymMatrix<T> &s);
 
 
